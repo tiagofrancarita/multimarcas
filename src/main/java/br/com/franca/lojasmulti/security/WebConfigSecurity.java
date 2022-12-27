@@ -15,8 +15,8 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter implements H
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(HttpMethod.GET, "/salvarAcesso", "/deleteAcesso")
-                .antMatchers(HttpMethod.POST, "/salvarAcesso", "/deleteAcesso")
+        web.ignoring().antMatchers(HttpMethod.GET, "/acessos/salvarAcesso", "/acessos/deleteAcesso")
+                .antMatchers(HttpMethod.POST, "/acessos/salvarAcesso", "/acessos/deleteAcesso")
                 .antMatchers("/manos-multi/swagger-ui/index.html#/");
         /*Ingnorando URL no momento para nao autenticar*/
     }
