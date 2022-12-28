@@ -4,8 +4,6 @@ import br.com.franca.lojasmulti.model.Acesso;
 import br.com.franca.lojasmulti.repository.AcessoRepository;
 import br.com.franca.lojasmulti.service.AcessoService;
 
-import io.swagger.annotations.ApiOperation;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

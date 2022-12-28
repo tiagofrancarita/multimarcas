@@ -19,10 +19,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import br.com.franca.lojasmulti.controller.AcessoController;
 import br.com.franca.lojasmulti.model.Acesso;
 import br.com.franca.lojasmulti.repository.AcessoRepository;
-import junit.framework.TestCase;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(classes = LojasmultiApplication.class)
-public class TestesAcesso extends TestCase {
+public class TestesAcesso {
 	
 
 	private AcessoController acessoController; 
@@ -90,31 +91,7 @@ public class TestesAcesso extends TestCase {
 	    assertEquals(200, retornoApi.andReturn().getResponse().getStatus());
 	    
 	}
-	
-	@Test
-	public void testRestApiDeleteAcessoPorIdAcesso() throws JsonProcessingException, Exception {
-		
-	    DefaultMockMvcBuilder builder = MockMvcBuilders.webAppContextSetup(this.wac);
-	    MockMvc mockMvc = builder.build();
-	    
-	    Acesso acesso = new Acesso();
-	    acesso.setDescricao("ROLE_TESTE_DELETE");
-	    acesso = acessoRepository.save(acesso);
-	    
-	    ObjectMapper objectMapper = new ObjectMapper();
-	    ResultActions retornoApi = mockMvc
-	    						 .perform(MockMvcRequestBuilders.delete("/deleteAcessoPorId/" + acesso.getId())
-	    						 .content(objectMapper.writeValueAsString(acesso))
-	    						 .accept(MediaType.APPLICATION_JSON)
-	    						 .contentType(MediaType.APPLICATION_JSON));
-	    
-	    System.out.println("Retorno da API: " + retornoApi.andReturn().getResponse().getContentAsString());
-	    System.out.println("Status de retorno: " + retornoApi.andReturn().getResponse().getStatus());
-	    
-	    assertEquals("Acesso Removido", retornoApi.andReturn().getResponse().getContentAsString());
-	    assertEquals(200, retornoApi.andReturn().getResponse().getStatus());
-	    
-	}
+
 	
 	@Test
 	public void testRestApiObterAcessoID() throws JsonProcessingException, Exception {
@@ -152,7 +129,7 @@ public class TestesAcesso extends TestCase {
 	    
 	    Acesso acesso = new Acesso();
 	    acesso.setDescricao("ROLE_TESTE_OBTER_LIST");
-	    acesso = acessoRepository.save(acesso);
+		acesso = acessoController.salvarAcesso(acesso).getBody();
 	    
 	    ObjectMapper objectMapper = new ObjectMapper();
 	    ResultActions retornoApi = mockMvc
